@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Verifikasi Ijazah - UMS</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    text-align: center;
+    margin: 0;
+}
+
+.top-bar {
+    background: #1976d2;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+.container {
+    margin-top: 40px;
+}
+
+.logo {
+    width: 90px;
+    margin-bottom: 10px;
+}
+
+h2 { margin: 5px; }
+h3 { margin: 5px; color: #555; }
+
+.captcha-box {
+    margin: 20px auto;
+    background: #eee;
+    padding: 10px;
+    width: 130px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    border-radius: 5px;
+}
+
+input {
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background: #1976d2;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #0d47a1;
+}
+
+.hidden { display: none; }
+
+#loading {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #1976d2;
+}
+
+.card {
+    margin-top: 30px;
+    background: white;
+    padding: 25px;
+    width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.valid {
+    color: green;
+    font-weight: bold;
+}
+
+.invalid {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.header-card {
+    text-align: center;
+    margin-bottom: 15px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="top-bar">verifikasi.ums.ac.id</div>
+
+<div class="container">
+
+    <!-- LOGO (ganti jika ada) -->
+    <img src="https://upload.wikimedia.org/wikipedia/id/thumb/5/5c/Logo_UMS.png/200px-Logo_UMS.png" class="logo">
+
+    <h2>Verifikasi Ijazah</h2>
+    <h3>Universitas Muhammadiyah Surakarta</h3>
+
+    <div class="captcha-box" id="captcha">XZ3X3T</div>
+
+    <input type="text" id="captchaInput" placeholder="Masukkan kode di atas">
+    <input type="text" id="searchInput" placeholder="Cari Nama atau NIM">
+
+    <button onclick="verifikasi()">Tampilkan</button>
+
+    <div id="loading" class="hidden">⏳ Memuat data akademik...</div>
+
+    <div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+const database = [
+    {
+        nama: "Muhammad Agil",
+        nim: "A12345",
+        jurusan: "Manajemen",
+        fakultas: "Ekonomi dan Bisnis",
+        tahun: "2024",
+        ipk: "3.85",
+        status: "VALID",
+        noIjazah: "UMS-2024-00123"
+    }
+];
+
+function verifikasi() {
+    let captcha = document.getElementById("captcha").innerText.toLowerCase();
+    let inputCaptcha = document.getElementById("captchaInput").value.toLowerCase();
+    let keyword = document.getElementById("searchInput").value.toLowerCase();
+
+    if (captcha !== inputCaptcha) {
+        alert("Captcha salah!");
+        return;
+    }
+
+    document.getElementById("loading").classList.remove("hidden");
+    document.getElementById("result").classList.add("hidden");
+
+    setTimeout(() => {
+        document.getElementById("loading").classList.add("hidden");
+
+        let data = database.find(d =>
+            d.nama.toLowerCase().includes(keyword) ||
+            d.nim.toLowerCase().includes(keyword)
+        );
+
+        let resultBox = document.getElementById("result");
+
+        if (data) {
+            resultBox.innerHTML = `
+                <div class="card">
+                    <div class="header-card">
+                        <h3>Status Ijazah</h3>
+                        <h2 class="valid">${data.status}</h2>
+                    </div>
+
+                    <hr>
+
+                    <p><span class="label">Nama:</span> ${data.nama}</p>
+                    <p><span class="label">NIM:</span> ${data.nim}</p>
+                    <p><span class="label">No Ijazah:</span> ${data.noIjazah}</p>
+                    <p><span class="label">Jurusan:</span> ${data.jurusan}</p>
+                    <p><span class="label">Fakultas:</span> ${data.fakultas}</p>
+                    <p><span class="label">Tahun Lulus:</span> ${data.tahun}</p>
+                    <p><span class="label">IPK:</span> ${data.ipk}</p>
+                </div>
+            `;
+        } else {
+            resultBox.innerHTML = `<div class="card"><p class="invalid">Data tidak ada</p></div>`;
+        }
+
+        resultBox.classList.remove("hidden");
+
+    }, 1500);
+}
+</script>
+
+</body>
+  </html>
