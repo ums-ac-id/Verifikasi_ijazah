@@ -10,10 +10,11 @@
 
 body{
 font-family:"Times New Roman", serif;
-background:linear-gradient(135deg,#f5f7fa,#c3cfe2);
+background:linear-gradient(135deg,#eef2f7,#cfd9e6);
 min-height:100vh;
 }
 
+/* HEADER */
 .header{
 background:#0d47a1;
 color:#fff;
@@ -21,19 +22,21 @@ padding:12px 20px;
 font-size:14px;
 }
 
+/* CONTAINER */
 .container{
-max-width:600px;
+max-width:650px;
 margin:auto;
 padding:30px 20px;
 position:relative;
 }
 
+/* PAGE TRANSITION */
 .page{
 position:absolute;
 top:0;left:0;right:0;
 opacity:0;
-transform:translateX(50px);
-transition:all .5s ease-in-out;
+transform:translateX(40px);
+transition:all .4s ease;
 pointer-events:none;
 }
 
@@ -43,30 +46,29 @@ transform:translateX(0);
 pointer-events:auto;
 }
 
-.logo{
-width:100px;
-margin:0 auto 15px;
-display:block;
-}
-
-.title{text-align:center;font-size:22px;font-weight:bold;}
-.subtitle{text-align:center;color:#0d47a1;margin-bottom:20px;}
-
+/* CARD */
 .card{
 background:#fff;
 padding:25px;
 border-radius:12px;
-box-shadow:0 5px 25px rgba(0,0,0,.1);
+box-shadow:0 8px 30px rgba(0,0,0,.1);
 }
 
+/* TITLE */
+.logo{width:100px;margin:auto;display:block;}
+.title{text-align:center;font-size:22px;font-weight:bold;margin-top:10px;}
+.subtitle{text-align:center;color:#0d47a1;margin-bottom:20px;}
+
+/* INPUT */
 input{
 width:100%;
 padding:12px;
 margin:10px 0;
-border:1px solid #ccc;
 border-radius:6px;
+border:1px solid #ccc;
 }
 
+/* BUTTON */
 button{
 width:100%;
 padding:12px;
@@ -75,15 +77,10 @@ color:#fff;
 border:none;
 border-radius:6px;
 cursor:pointer;
-}
-
-.captcha{
-background:#eee;
-padding:12px;
-text-align:center;
-letter-spacing:5px;
 font-weight:bold;
 }
+
+button:hover{background:#08306b;}
 
 /* LOADING */
 #loading{
@@ -111,18 +108,15 @@ animation:spin 1s linear infinite;
 }
 
 /* IDENTITY */
-.identity{
-position:relative;
-}
+.identity{position:relative;}
 
 .watermark{
 position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-width:300px;
+width:320px;
 opacity:0.05;
-pointer-events:none;
 }
 
 .identity-header{
@@ -131,35 +125,47 @@ border-bottom:1px solid #ddd;
 padding-bottom:15px;
 }
 
-.identity-header img{
-width:80px;
-margin-bottom:10px;
-}
+.identity-header img{width:80px;}
 
 .identity-name{
 font-size:20px;
 font-weight:bold;
+margin-top:10px;
 }
 
 .status{
 color:green;
 font-weight:bold;
+margin-top:5px;
 }
 
-.info{
-margin-top:15px;
+/* INFO */
+.info{margin-top:15px;}
+
+.info-row{
+display:flex;
+justify-content:space-between;
+padding:8px 0;
+border-bottom:1px solid #eee;
 }
 
-.info p{
-margin:6px 0;
+.info-row span:first-child{
+font-weight:bold;
 }
 
+/* FOOTER */
 .footer{
-margin-top:30px;
+margin-top:20px;
 text-align:center;
 font-size:12px;
 color:#555;
 line-height:1.6;
+}
+
+/* MOBILE */
+@media(max-width:500px){
+.container{padding:20px 15px;}
+.title{font-size:18px;}
 }
 </style>
 </head>
@@ -168,6 +174,7 @@ line-height:1.6;
 
 <div class="header">verifikasi.ums.ac.id</div>
 
+<!-- LOADING -->
 <div id="loading">
 <div class="loader"></div>
 <p style="margin-top:15px;">Memuat data akademik...</p>
@@ -175,8 +182,8 @@ line-height:1.6;
 
 <div class="container">
 
-<!-- PAGE 1 -->
-<div id="page1" class="page active">
+<!-- PAGE SEARCH -->
+<div id="searchPage" class="page active">
 
 <img src="https://upload.wikimedia.org/wikipedia/id/thumb/5/5c/Logo_UMS.png/200px-Logo_UMS.png" class="logo">
 
@@ -184,16 +191,14 @@ line-height:1.6;
 <div class="subtitle">Universitas Muhammadiyah Surakarta</div>
 
 <div class="card">
-<div class="captcha" id="captcha">XZ3X3T</div>
-<input type="text" id="captchaInput" placeholder="Masukkan kode">
-<input type="text" id="searchInput" placeholder="Nama / NIM">
-<button onclick="verifikasi()">Tampilkan</button>
+<input type="text" id="keyword" placeholder="Masukkan Nama atau NIM">
+<button onclick="cari()">Tampilkan</button>
 </div>
 
 </div>
 
-<!-- PAGE 2 -->
-<div id="page2" class="page">
+<!-- PAGE IDENTITAS -->
+<div id="resultPage" class="page">
 
 <div class="card identity">
 
@@ -213,9 +218,9 @@ Diverifikasi oleh Universitas Muhammadiyah Surakarta<br>
 Nomor Verifikasi: UMS-VER-<span id="verif"></span><br><br>
 
 © 2026 Universitas Muhammadiyah Surakarta. All Rights Reserved.<br>
-Sistem Verifikasi Ijazah Digital Resmi<br>
-Jl. A. Yani Tromol Pos 1, Pabelan, Kartasura, Sukoharjo 57169<br>
-Telp: (0271) 717417 | Email: info@ums.ac.id | www.ums.ac.id
+Sistem Verifikasi Ijazah Digital<br>
+Jl. A. Yani Tromol Pos 1 Kartasura Sukoharjo 57169<br>
+Telp (0271) 717417 | info@ums.ac.id
 </div>
 
 <button onclick="kembali()">Kembali</button>
@@ -227,7 +232,7 @@ Telp: (0271) 717417 | Email: info@ums.ac.id | www.ums.ac.id
 </div>
 
 <script>
-const db={
+const dataMahasiswa={
 nama:"Muhammad Agil",
 nim:"09011281924045",
 prodi:"Informatika",
@@ -237,48 +242,53 @@ ipk:"3.85",
 ijazah:"602012024000123"
 };
 
-function verifikasi(){
-let cap=document.getElementById("captcha").innerText.toLowerCase();
-let input=document.getElementById("captchaInput").value.toLowerCase();
-let key=document.getElementById("searchInput").value.toLowerCase();
+function cari(){
+let key=document.getElementById("keyword").value.toLowerCase();
 
-if(cap!==input){alert("Captcha salah");return;}
+if(!key){
+alert("Masukkan Nama atau NIM");
+return;
+}
 
 document.getElementById("loading").style.display="flex";
 
 setTimeout(()=>{
+
 document.getElementById("loading").style.display="none";
 
 if(key.includes("agil")||key.includes("09011281924045")){
-document.getElementById("nama").innerText=db.nama;
-document.getElementById("nim").innerText="NIM: "+db.nim;
+
+document.getElementById("nama").innerText=dataMahasiswa.nama;
+document.getElementById("nim").innerText="NIM: "+dataMahasiswa.nim;
 
 document.getElementById("data").innerHTML=`
-<p><b>Program Studi:</b> ${db.prodi}</p>
-<p><b>Fakultas:</b> ${db.fakultas}</p>
-<p><b>Tahun Lulus:</b> ${db.tahun}</p>
-<p><b>IPK:</b> ${db.ipk}</p>
-<p><b>No Ijazah:</b> ${db.ijazah}</p>
+<div class="info-row"><span>Program Studi</span><span>${dataMahasiswa.prodi}</span></div>
+<div class="info-row"><span>Fakultas</span><span>${dataMahasiswa.fakultas}</span></div>
+<div class="info-row"><span>Tahun Lulus</span><span>${dataMahasiswa.tahun}</span></div>
+<div class="info-row"><span>IPK</span><span>${dataMahasiswa.ipk}</span></div>
+<div class="info-row"><span>No Ijazah</span><span>${dataMahasiswa.ijazah}</span></div>
 `;
 
 document.getElementById("verif").innerText=Math.floor(Math.random()*999999);
 
-transisi("page1","page2");
+switchPage("searchPage","resultPage");
 
 }else{
-alert("Data tidak ada");
+alert("Data tidak ditemukan");
 }
 
 },1500);
 }
 
-function transisi(from,to){
+function switchPage(from,to){
 document.getElementById(from).classList.remove("active");
-setTimeout(()=>{document.getElementById(to).classList.add("active");},200);
+setTimeout(()=>{
+document.getElementById(to).classList.add("active");
+},150);
 }
 
 function kembali(){
-transisi("page2","page1");
+switchPage("resultPage","searchPage");
 }
 </script>
 
