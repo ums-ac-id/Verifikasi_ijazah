@@ -2,91 +2,113 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Verifikasi Ijazah - UMS</title>
 
 <style>
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f9;
-    text-align: center;
     margin: 0;
+    font-family: "Times New Roman", serif;
+    background: #f4f6f9;
 }
 
+/* TOP BAR */
 .top-bar {
-    background: #1976d2;
+    background: #0d47a1;
     color: white;
-    padding: 12px;
-    text-align: left;
-    padding-left: 20px;
-    font-weight: bold;
+    padding: 12px 20px;
+    font-size: 14px;
 }
 
+/* CONTAINER */
 .container {
-    margin-top: 40px;
+    text-align: center;
+    padding: 30px 15px;
 }
 
+/* LOGO */
 .logo {
-    width: 90px;
+    width: 80px;
     margin-bottom: 10px;
 }
 
+/* TITLE */
 h2 { margin: 5px; }
-h3 { margin: 5px; color: #555; }
+h3 { margin: 5px; color: #444; font-weight: normal; }
 
+/* CAPTCHA */
 .captcha-box {
     margin: 20px auto;
     background: #eee;
     padding: 10px;
-    width: 130px;
-    font-weight: bold;
+    width: 140px;
     letter-spacing: 4px;
+    font-weight: bold;
     border-radius: 5px;
 }
 
+/* INPUT */
 input {
+    width: 90%;
+    max-width: 320px;
+    padding: 10px;
+    margin: 8px auto;
     display: block;
-    margin: 10px auto;
-    padding: 12px;
-    width: 300px;
-    border-radius: 5px;
     border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
+/* BUTTON */
 button {
-    background: #1976d2;
+    background: #0d47a1;
     color: white;
+    padding: 10px 30px;
     border: none;
-    padding: 12px 40px;
-    cursor: pointer;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 button:hover {
-    background: #0d47a1;
+    background: #08306b;
 }
 
-.hidden { display: none; }
-
+/* LOADING */
 #loading {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #1976d2;
+    margin-top: 15px;
+    font-style: italic;
 }
 
+/* PAGE TRANSITION */
+.page {
+    transition: all 0.5s ease;
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+}
+
+/* RESULT CARD */
 .card {
-    margin-top: 30px;
     background: white;
+    max-width: 500px;
+    margin: 30px auto;
     padding: 25px;
-    width: 420px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 12px;
+    border-radius: 10px;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
     text-align: left;
 }
 
+.header-card {
+    text-align: center;
+}
+
 .valid {
     color: green;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -100,9 +122,22 @@ button:hover {
     font-weight: bold;
 }
 
-.header-card {
+/* FOOTER */
+.footer {
+    margin-top: 40px;
+    padding: 20px;
+    background: #0d47a1;
+    color: white;
+    font-size: 12px;
     text-align: center;
-    margin-bottom: 15px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 500px) {
+    .card {
+        margin: 20px 10px;
+        padding: 20px;
+    }
 }
 </style>
 
@@ -111,9 +146,8 @@ button:hover {
 
 <div class="top-bar">verifikasi.ums.ac.id</div>
 
-<div class="container">
-
-    <!-- LOGO (ganti jika ada) -->
+<!-- HALAMAN 1 -->
+<div id="page1" class="page container">
     <img src="https://upload.wikimedia.org/wikipedia/id/thumb/5/5c/Logo_UMS.png/200px-Logo_UMS.png" class="logo">
 
     <h2>Verifikasi Ijazah</h2>
@@ -126,10 +160,20 @@ button:hover {
 
     <button onclick="verifikasi()">Tampilkan</button>
 
-    <div id="loading" class="hidden">⏳ Memuat data akademik...</div>
+    <div id="loading" class="hidden">Memuat data akademik...</div>
+</div>
 
-    <div id="result" class="hidden"></div>
+<!-- HALAMAN 2 -->
+<div id="page2" class="page hidden">
+    <div id="result"></div>
+</div>
 
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 Universitas Muhammadiyah Surakarta<br>
+    Sistem Verifikasi Ijazah Online<br>
+    Alamat: Jl. A. Yani Tromol Pos 1, Pabelan, Surakarta<br>
+    Email: info@ums.ac.id | Website: www.ums.ac.id
 </div>
 
 <script>
@@ -157,7 +201,6 @@ function verifikasi() {
     }
 
     document.getElementById("loading").classList.remove("hidden");
-    document.getElementById("result").classList.add("hidden");
 
     setTimeout(() => {
         document.getElementById("loading").classList.add("hidden");
@@ -167,36 +210,37 @@ function verifikasi() {
             d.nim.toLowerCase().includes(keyword)
         );
 
-        let resultBox = document.getElementById("result");
+        let resultHTML;
 
         if (data) {
-            resultBox.innerHTML = `
-                <div class="card">
-                    <div class="header-card">
-                        <h3>Status Ijazah</h3>
-                        <h2 class="valid">${data.status}</h2>
-                    </div>
-
-                    <hr>
-
-                    <p><span class="label">Nama:</span> ${data.nama}</p>
-                    <p><span class="label">NIM:</span> ${data.nim}</p>
-                    <p><span class="label">No Ijazah:</span> ${data.noIjazah}</p>
-                    <p><span class="label">Jurusan:</span> ${data.jurusan}</p>
-                    <p><span class="label">Fakultas:</span> ${data.fakultas}</p>
-                    <p><span class="label">Tahun Lulus:</span> ${data.tahun}</p>
-                    <p><span class="label">IPK:</span> ${data.ipk}</p>
+            resultHTML = `
+            <div class="card">
+                <div class="header-card">
+                    <h2>Status Ijazah</h2>
+                    <div class="valid">${data.status}</div>
                 </div>
-            `;
+                <hr>
+                <p><span class="label">Nama:</span> ${data.nama}</p>
+                <p><span class="label">NIM:</span> ${data.nim}</p>
+                <p><span class="label">Nomor Ijazah:</span> ${data.noIjazah}</p>
+                <p><span class="label">Program Studi:</span> ${data.jurusan}</p>
+                <p><span class="label">Fakultas:</span> ${data.fakultas}</p>
+                <p><span class="label">Tahun Lulus:</span> ${data.tahun}</p>
+                <p><span class="label">IPK:</span> ${data.ipk}</p>
+            </div>`;
         } else {
-            resultBox.innerHTML = `<div class="card"><p class="invalid">Data tidak ada</p></div>`;
+            resultHTML = `<div class="card"><p class="invalid">Data tidak ada</p></div>`;
         }
 
-        resultBox.classList.remove("hidden");
+        document.getElementById("result").innerHTML = resultHTML;
+
+        // TRANSISI HALAMAN
+        document.getElementById("page1").classList.add("hidden");
+        document.getElementById("page2").classList.remove("hidden");
 
     }, 1500);
 }
 </script>
 
 </body>
-  </html>
+</html>
