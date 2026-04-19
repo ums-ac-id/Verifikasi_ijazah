@@ -14,7 +14,6 @@ background:linear-gradient(135deg,#f5f7fa,#c3cfe2);
 min-height:100vh;
 }
 
-/* HEADER */
 .header{
 background:#0d47a1;
 color:#fff;
@@ -22,7 +21,6 @@ padding:12px 20px;
 font-size:14px;
 }
 
-/* CONTAINER */
 .container{
 max-width:600px;
 margin:auto;
@@ -30,7 +28,6 @@ padding:30px 20px;
 position:relative;
 }
 
-/* PAGE */
 .page{
 position:absolute;
 top:0;left:0;right:0;
@@ -46,18 +43,15 @@ transform:translateX(0);
 pointer-events:auto;
 }
 
-/* LOGO */
 .logo{
 width:100px;
 margin:0 auto 15px;
 display:block;
 }
 
-/* TITLE */
 .title{text-align:center;font-size:22px;font-weight:bold;}
 .subtitle{text-align:center;color:#0d47a1;margin-bottom:20px;}
 
-/* CARD */
 .card{
 background:#fff;
 padding:25px;
@@ -65,7 +59,6 @@ border-radius:12px;
 box-shadow:0 5px 25px rgba(0,0,0,.1);
 }
 
-/* INPUT */
 input{
 width:100%;
 padding:12px;
@@ -74,7 +67,6 @@ border:1px solid #ccc;
 border-radius:6px;
 }
 
-/* BUTTON */
 button{
 width:100%;
 padding:12px;
@@ -85,7 +77,6 @@ border-radius:6px;
 cursor:pointer;
 }
 
-/* CAPTCHA */
 .captcha{
 background:#eee;
 padding:12px;
@@ -163,12 +154,12 @@ margin-top:15px;
 margin:6px 0;
 }
 
-/* FOOTER */
 .footer{
 margin-top:30px;
 text-align:center;
 font-size:12px;
 color:#555;
+line-height:1.6;
 }
 </style>
 </head>
@@ -177,7 +168,6 @@ color:#555;
 
 <div class="header">verifikasi.ums.ac.id</div>
 
-<!-- LOADING -->
 <div id="loading">
 <div class="loader"></div>
 <p style="margin-top:15px;">Memuat data akademik...</p>
@@ -202,7 +192,7 @@ color:#555;
 
 </div>
 
-<!-- PAGE 2 (IDENTITAS) -->
+<!-- PAGE 2 -->
 <div id="page2" class="page">
 
 <div class="card identity">
@@ -220,7 +210,12 @@ color:#555;
 
 <div class="footer">
 Diverifikasi oleh Universitas Muhammadiyah Surakarta<br>
-Nomor Verifikasi: UMS-VER-<span id="verif"></span>
+Nomor Verifikasi: UMS-VER-<span id="verif"></span><br><br>
+
+© 2026 Universitas Muhammadiyah Surakarta. All Rights Reserved.<br>
+Sistem Verifikasi Ijazah Digital Resmi<br>
+Jl. A. Yani Tromol Pos 1, Pabelan, Kartasura, Sukoharjo 57169<br>
+Telp: (0271) 717417 | Email: info@ums.ac.id | www.ums.ac.id
 </div>
 
 <button onclick="kembali()">Kembali</button>
@@ -252,11 +247,9 @@ if(cap!==input){alert("Captcha salah");return;}
 document.getElementById("loading").style.display="flex";
 
 setTimeout(()=>{
-
 document.getElementById("loading").style.display="none";
 
 if(key.includes("agil")||key.includes("09011281924045")){
-
 document.getElementById("nama").innerText=db.nama;
 document.getElementById("nim").innerText="NIM: "+db.nim;
 
@@ -280,14 +273,8 @@ alert("Data tidak ada");
 }
 
 function transisi(from,to){
-let p1=document.getElementById(from);
-let p2=document.getElementById(to);
-
-p1.classList.remove("active");
-
-setTimeout(()=>{
-p2.classList.add("active");
-},200);
+document.getElementById(from).classList.remove("active");
+setTimeout(()=>{document.getElementById(to).classList.add("active");},200);
 }
 
 function kembali(){
