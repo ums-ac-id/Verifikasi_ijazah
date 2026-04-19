@@ -1,246 +1,926 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verifikasi Ijazah - UMS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi Ijazah - Universitas Muhammadiyah Surakarta</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-body {
-    margin: 0;
-    font-family: "Times New Roman", serif;
-    background: #f4f6f9;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-/* TOP BAR */
-.top-bar {
-    background: #0d47a1;
-    color: white;
-    padding: 12px 20px;
-    font-size: 14px;
-}
+        /* Header */
+        .header {
+            background: #1565c0;
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-/* CONTAINER */
-.container {
-    text-align: center;
-    padding: 30px 15px;
-}
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
 
-/* LOGO */
-.logo {
-    width: 80px;
-    margin-bottom: 10px;
-}
+        .header-left .back-arrow {
+            font-size: 20px;
+            cursor: pointer;
+        }
 
-/* TITLE */
-h2 { margin: 5px; }
-h3 { margin: 5px; color: #444; font-weight: normal; }
+        .header-right {
+            display: flex;
+            gap: 15px;
+        }
 
-/* CAPTCHA */
-.captcha-box {
-    margin: 20px auto;
-    background: #eee;
-    padding: 10px;
-    width: 140px;
-    letter-spacing: 4px;
-    font-weight: bold;
-    border-radius: 5px;
-}
+        .header-right svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+            cursor: pointer;
+        }
 
-/* INPUT */
-input {
-    width: 90%;
-    max-width: 320px;
-    padding: 10px;
-    margin: 8px auto;
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+        /* Main Container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: calc(100vh - 50px);
+            position: relative;
+        }
 
-/* BUTTON */
-button {
-    background: #0d47a1;
-    color: white;
-    padding: 10px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        /* Page Transitions */
+        .page {
+            position: absolute;
+            top: 40px;
+            left: 20px;
+            right: 20px;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
 
-button:hover {
-    background: #08306b;
-}
+        .page.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: all;
+        }
 
-/* LOADING */
-#loading {
-    margin-top: 15px;
-    font-style: italic;
-}
+        .page.exit {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
 
-/* PAGE TRANSITION */
-.page {
-    transition: all 0.5s ease;
-}
+        /* Logo Section */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease;
+        }
 
-.hidden {
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-    position: absolute;
-    width: 100%;
-}
+        .logo-ums {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 3px solid #1565c0;
+            position: relative;
+            overflow: hidden;
+        }
 
-/* RESULT CARD */
-.card {
-    background: white;
-    max-width: 500px;
-    margin: 30px auto;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    text-align: left;
-}
+        .logo-ums::before {
+            content: "UMS";
+            font-size: 36px;
+            font-weight: bold;
+            color: #1565c0;
+            letter-spacing: 2px;
+        }
 
-.header-card {
-    text-align: center;
-}
+        .logo-ums::after {
+            content: "";
+            position: absolute;
+            bottom: 15px;
+            width: 60%;
+            height: 2px;
+            background: #d4af37;
+        }
 
-.valid {
-    color: green;
-    font-size: 20px;
-    font-weight: bold;
-}
+        .title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
 
-.invalid {
-    color: red;
-    text-align: center;
-    font-weight: bold;
-}
+        .subtitle {
+            font-size: 20px;
+            color: #1565c0;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
 
-.label {
-    font-weight: bold;
-}
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #1565c0, transparent);
+            margin: 25px 0;
+        }
 
-/* FOOTER */
-.footer {
-    margin-top: 40px;
-    padding: 20px;
-    background: #0d47a1;
-    color: white;
-    font-size: 12px;
-    text-align: center;
-}
+        /* CAPTCHA Section */
+        .captcha-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
 
-/* RESPONSIVE */
-@media (max-width: 500px) {
-    .card {
-        margin: 20px 10px;
-        padding: 20px;
-    }
-}
-</style>
+        .captcha-box {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 15px 0;
+            border: 2px dashed #ccc;
+            position: relative;
+            overflow: hidden;
+        }
 
+        .captcha-text {
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 8px;
+            color: #1565c0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .captcha-noise {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0,0,0,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0,0,0,0.05) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .captcha-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .captcha-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+            letter-spacing: 4px;
+            transition: all 0.3s;
+            margin: 10px 0;
+        }
+
+        .captcha-input:focus {
+            outline: none;
+            border-color: #1565c0;
+            box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.1);
+        }
+
+        .reload-link {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 13px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin: 10px 0;
+        }
+
+        .reload-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            background: #0d47a1;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(21, 101, 192, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Search Page */
+        .search-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px 14px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #1565c0;
+            box-shadow: 0 0 0 4px rgba(21, 101, 192, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .search-hint {
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .btn-search {
+            width: 100%;
+            padding: 14px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-search:hover {
+            background: #1b5e20;
+        }
+
+        /* Loading Screen */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #e3f2fd;
+            border-top: 4px solid #1565c0;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .loading-text {
+            font-size: 16px;
+            color: #1565c0;
+            font-weight: 500;
+        }
+
+        .loading-subtext {
+            font-size: 13px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Identity Card */
+        .identity-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        .identity-header {
+            background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .identity-header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+        }
+
+        .identity-photo {
+            width: 100px;
+            height: 120px;
+            background: white;
+            border-radius: 8px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid rgba(255,255,255,0.5);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .identity-photo::after {
+            content: "👤";
+            font-size: 50px;
+            opacity: 0.3;
+        }
+
+        .identity-name {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .identity-nim {
+            font-size: 14px;
+            opacity: 0.9;
+            font-family: monospace;
+            letter-spacing: 1px;
+        }
+
+        .identity-body {
+            padding: 25px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #1565c0;
+        }
+
+        .info-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .info-full {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #4caf50;
+            margin-bottom: 15px;
+        }
+
+        .verification-footer {
+            background: #e8f5e9;
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid #c8e6c9;
+        }
+
+        .verification-text {
+            color: #2e7d32;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .qr-section {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-top: 1px dashed #ddd;
+        }
+
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border: 2px solid #1565c0;
+            border-radius: 8px;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-pattern {
+            width: 80%;
+            height: 80%;
+            background-image: 
+                repeating-linear-gradient(0deg, #1565c0 0px, #1565c0 4px, transparent 4px, transparent 8px),
+                repeating-linear-gradient(90deg, #1565c0 0px, #1565c0 4px, transparent 4px, transparent 8px);
+            background-size: 8px 8px;
+            opacity: 0.3;
+        }
+
+        .qr-label {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .back-btn {
+            width: 100%;
+            padding: 12px;
+            background: #f5f5f5;
+            color: #666;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #eeeeee;
+        }
+
+        /* Error Message */
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            border-left: 4px solid #c62828;
+            display: none;
+            margin-top: 15px;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+
+        /* Animations */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .title { font-size: 20px; }
+            .subtitle { font-size: 18px; }
+        }
+
+        /* Watermark */
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0.1;
+            font-size: 12px;
+            color: #1565c0;
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
 
-<div class="top-bar">verifikasi.ums.ac.id</div>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <span class="back-arrow" onclick="goBack()">←</span>
+            <span>Verifikasi.ums.ac.id</span>
+        </div>
+        <div class="header-right">
+            <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        </div>
+    </div>
 
-<!-- HALAMAN 1 -->
-<div id="page1" class="page container">
-    <img src="https://upload.wikimedia.org/wikipedia/id/thumb/5/5c/Logo_UMS.png/200px-Logo_UMS.png" class="logo">
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+        <div class="loading-text">Memuat Data Akademik...</div>
+        <div class="loading-subtext">Mohon tunggu sebentar</div>
+    </div>
 
-    <h2>Verifikasi Ijazah</h2>
-    <h3>Universitas Muhammadiyah Surakarta</h3>
+    <div class="container">
+        
+        <!-- PAGE 1: CAPTCHA -->
+        <div class="page active" id="pageCaptcha">
+            <div class="logo-section">
+                <div class="logo-ums"></div>
+                <div class="title">Verifikasi Ijazah</div>
+                <div class="subtitle">Universitas Muhammadiyah Surakarta</div>
+            </div>
 
-    <div class="captcha-box" id="captcha">XZ3X3T</div>
+            <div class="divider"></div>
 
-    <input type="text" id="captchaInput" placeholder="Masukkan kode di atas">
-    <input type="text" id="searchInput" placeholder="Cari Nama atau NIM">
-
-    <button onclick="verifikasi()">Tampilkan</button>
-
-    <div id="loading" class="hidden">Memuat data akademik...</div>
-</div>
-
-<!-- HALAMAN 2 -->
-<div id="page2" class="page hidden">
-    <div id="result"></div>
-</div>
-
-<!-- FOOTER -->
-<div class="footer">
-    © 2026 Universitas Muhammadiyah Surakarta<br>
-    Sistem Verifikasi Ijazah Online<br>
-    Alamat: Jl. A. Yani Tromol Pos 1, Pabelan, Surakarta<br>
-    Email: info@ums.ac.id | Website: www.ums.ac.id
-</div>
-
-<script>
-const database = [
-    {
-        nama: "Muhammad Agil",
-        nim: "A12345",
-        jurusan: "Manajemen",
-        fakultas: "Ekonomi dan Bisnis",
-        tahun: "2024",
-        ipk: "3.85",
-        status: "VALID",
-        noIjazah: "UMS-2024-00123"
-    }
-];
-
-function verifikasi() {
-    let captcha = document.getElementById("captcha").innerText.toLowerCase();
-    let inputCaptcha = document.getElementById("captchaInput").value.toLowerCase();
-    let keyword = document.getElementById("searchInput").value.toLowerCase();
-
-    if (captcha !== inputCaptcha) {
-        alert("Captcha salah!");
-        return;
-    }
-
-    document.getElementById("loading").classList.remove("hidden");
-
-    setTimeout(() => {
-        document.getElementById("loading").classList.add("hidden");
-
-        let data = database.find(d =>
-            d.nama.toLowerCase().includes(keyword) ||
-            d.nim.toLowerCase().includes(keyword)
-        );
-
-        let resultHTML;
-
-        if (data) {
-            resultHTML = `
-            <div class="card">
-                <div class="header-card">
-                    <h2>Status Ijazah</h2>
-                    <div class="valid">${data.status}</div>
+            <div class="captcha-container">
+                <div class="captcha-label">Masukkan kode di atas:</div>
+                <div class="captcha-box">
+                    <div class="captcha-noise"></div>
+                    <div class="captcha-text" id="captchaText">xz3x3t</div>
                 </div>
-                <hr>
-                <p><span class="label">Nama:</span> ${data.nama}</p>
-                <p><span class="label">NIM:</span> ${data.nim}</p>
-                <p><span class="label">Nomor Ijazah:</span> ${data.noIjazah}</p>
-                <p><span class="label">Program Studi:</span> ${data.jurusan}</p>
-                <p><span class="label">Fakultas:</span> ${data.fakultas}</p>
-                <p><span class="label">Tahun Lulus:</span> ${data.tahun}</p>
-                <p><span class="label">IPK:</span> ${data.ipk}</p>
-            </div>`;
-        } else {
-            resultHTML = `<div class="card"><p class="invalid">Data tidak ada</p></div>`;
+                
+                <input type="text" class="captcha-input" id="captchaInput" placeholder="Ketik kode di sini" maxlength="6">
+                
+                <div>
+                    <a class="reload-link" onclick="generateCaptcha()">
+                        <span>↻</span> Klik disini untuk memuat ulang kode validasi tersebut.
+                    </a>
+                </div>
+
+                <div class="error-message" id="captchaError">
+                    Kode yang Anda masukkan salah. Silakan coba lagi.
+                </div>
+
+                <button class="btn-primary" onclick="verifyCaptcha()">Tampilkan</button>
+            </div>
+        </div>
+
+        <!-- PAGE 2: SEARCH -->
+        <div class="page" id="pageSearch">
+            <div class="logo-section">
+                <div class="logo-ums" style="width:80px;height:80px;"></div>
+                <div class="title" style="font-size:20px;">Pencarian Data Ijazah</div>
+                <div class="subtitle" style="font-size:16px;">Universitas Muhammadiyah Surakarta</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="search-container">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Cari berdasarkan Nama atau NIM...">
+                </div>
+                
+                <div class="search-hint">
+                    Contoh: Muhammad Agil atau 09011281924045
+                </div>
+
+                <div class="error-message" id="searchError" style="margin-top:15px;">
+                    Data tidak ditemukan. Pastikan nama atau NIM yang Anda masukkan benar.
+                </div>
+
+                <button class="btn-search" onclick="searchData()" style="margin-top:20px;">
+                    Cari Data
+                </button>
+            </div>
+        </div>
+
+        <!-- PAGE 3: IDENTITY -->
+        <div class="page" id="pageIdentity">
+            <div class="identity-card">
+                <div class="identity-header">
+                    <div class="status-badge">
+                        <div class="status-dot"></div>
+                        <span>STATUS IJAZAH VALID</span>
+         </div>
+                    <div class="identity-photo"></div>
+                    <div class="identity-name" id="displayName">Muhammad Agil</div>
+                    <div class="identity-nim" id="displayNim">NIM: 09011281924045</div>
+                </div>
+
+                <div class="identity-body">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Fakultas</div>
+                            <div class="info-value">Teknik</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Program Studi</div>
+                            <div class="info-value">Informatika</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Jenjang</div>
+                            <div class="info-value">Sarjana (S1)</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Tahun Lulus</div>
+                            <div class="info-value">2024</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Gelar</div>
+                            <div class="info-value">S.Kom</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">IPK</div>
+                            <div class="info-value">3.85 / 4.00</div>
+                        </div>
+                    </div>
+
+                    <div class="info-full">
+                        <div class="info-label">Nomor Ijazah</div>
+                        <div class="info-value" style="font-family:monospace;letter-spacing:1px;">602012024000123</div>
+                    </div>
+
+                    <div class="info-full">
+                        <div class="info-label">Tanggal Kelulusan</div>
+                        <div class="info-value">15 Agustus 2024</div>
+                    </div>
+
+                    <div class="info-full">
+                        <div class="info-label">Yudisium</div>
+                        <div class="info-value">Dengan Pujian (Cumlaude)</div>
+                    </div>
+                </div>
+
+                <div class="qr-section">
+                    <div class="qr-code">
+                        <div class="qr-pattern"></div>
+                    </div>
+                    <div class="qr-label">Scan untuk verifikasi digital</div>
+                </div>
+
+                <div class="verification-footer">
+                    <div class="verification-text">
+                        <span>✓</span>
+                        <span>Diverifikasi oleh Universitas Muhammadiyah Surakarta</span>
+                    </div>
+                    <div style="font-size:11px;color:#666;margin-top:5px;">
+                        Tanggal Verifikasi: <span id="verifyDate"></span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="back-btn" onclick="goToSearch()">← Kembali ke Pencarian</button>
+        </div>
+
+    </div>
+
+    <div class="watermark">UMS © 2024</div>
+
+    <script>
+        // Data Mahasiswa (Simulasi Database)
+        const students = [
+            {
+                name: "Muhammad Agil",
+                nim: "09011281924045",
+                faculty: "Teknik",
+                major: "Informatika",
+                degree: "Sarjana (S1)",
+                year: "2024",
+                title: "S.Kom",
+                gpa: "3.85",
+                ijazah: "602012024000123",
+                graduationDate: "15 Agustus 2024",
+                yudisium: "Dengan Pujian (Cumlaude)"
+            }
+        ];
+
+        let currentCaptcha = "xz3x3t";
+
+        function generateCaptcha() {
+            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < 6; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            currentCaptcha = result;
+            document.getElementById('captchaText').textContent = result;
+            document.getElementById('captchaInput').value = '';
+            document.getElementById('captchaError').classList.remove('show');
         }
 
-        document.getElementById("result").innerHTML = resultHTML;
+        function verifyCaptcha() {
+            const input = document.getElementById('captchaInput').value.toLowerCase();
+            if (input === currentCaptcha) {
+                transitionTo('pageCaptcha', 'pageSearch');
+            } else {
+                document.getElementById('captchaError').classList.add('show');
+                setTimeout(() => {
+                    document.getElementById('captchaError').classList.remove('show');
+                }, 3000);
+            }
+        }
 
-        // TRANSISI HALAMAN
-        document.getElementById("page1").classList.add("hidden");
-        document.getElementById("page2").classList.remove("hidden");
+        function searchData() {
+            const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+            const errorDiv = document.getElementById('searchError');
+            
+            if (!keyword) {
+                errorDiv.textContent = "Silakan masukkan nama atau NIM terlebih dahulu.";
+                errorDiv.classList.add('show');
+                return;
+            }
 
-    }, 1500);
-}
-</script>
+            // Show loading
+            document.getElementById('loadingOverlay').classList.add('active');
+
+            // Simulate 1.5s loading
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.remove('active');
+                
+                const found = students.find(s => 
+                    s.name.toLowerCase().includes(keyword) || 
+                    s.nim.includes(keyword)
+                );
+
+                if (found) {
+                    displayIdentity(found);
+                    errorDiv.classList.remove('show');
+                } else {
+                    errorDiv.textContent = "Data tidak ditemukan. Pastikan nama atau NIM yang Anda masukkan benar.";
+                    errorDiv.classList.add('show');
+                }
+            }, 1500);
+        }
+
+        function displayIdentity(data) {
+            document.getElementById('displayName').textContent = data.name;
+            document.getElementById('displayNim').textContent = `NIM: ${data.nim}`;
+            document.getElementById('verifyDate').textContent = new Date().toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            
+            transitionTo('pageSearch', 'pageIdentity');
+        }
+
+        function transitionTo(fromId, toId) {
+            const from = document.getElementById(fromId);
+            const to = document.getElementById(toId);
+            
+            from.classList.add('exit');
+            from.classList.remove('active');
+            
+            setTimeout(() => {
+                from.classList.remove('exit');
+                to.classList.add('active');
+            }, 300);
+        }
+
+        function goToSearch() {
+            transitionTo('pageIdentity', 'pageSearch');
+            document.getElementById('searchInput').value = '';
+        }
+
+        function goBack() {
+            const pages = ['pageCaptcha', 'pageSearch', 'pageIdentity'];
+            const active = pages.find(id => document.getElementById(id).classList.contains('active'));
+            
+            if (active === 'pageSearch') {
+                transitionTo('pageSearch', 'pageCaptcha');
+            } else if (active === 'pageIdentity') {
+                transitionTo('pageIdentity', 'pageSearch');
+            }
+        }
+
+        // Enter key support
+        document.getElementById('captchaInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') verifyCaptcha();
+        });
+
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') searchData();
+        });
+
+        // Set current date
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.getElementById('verifyDate')) {
+                document.getElementById('verifyDate').textContent = new Date().toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
