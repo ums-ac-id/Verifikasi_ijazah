@@ -11,7 +11,6 @@
 body{
 font-family:"Times New Roman", serif;
 background:linear-gradient(135deg,#eef2f7,#cfd9e6);
-min-height:100vh;
 }
 
 /* HEADER */
@@ -19,7 +18,6 @@ min-height:100vh;
 background:#0d47a1;
 color:#fff;
 padding:12px 20px;
-font-size:14px;
 }
 
 /* CONTAINER */
@@ -33,7 +31,7 @@ position:relative;
 /* PAGE */
 .page{
 position:absolute;
-top:0;left:0;right:0;
+width:100%;
 opacity:0;
 transform:translateX(40px);
 transition:.4s;
@@ -50,15 +48,14 @@ pointer-events:auto;
 background:#fff;
 padding:25px;
 border-radius:12px;
-box-shadow:0 8px 30px rgba(0,0,0,.1);
+box-shadow:0 8px 25px rgba(0,0,0,.1);
 }
 
-/* TITLE */
+/* SEARCH */
 .logo{width:100px;margin:auto;display:block;}
 .title{text-align:center;font-size:22px;font-weight:bold;margin-top:10px;}
 .subtitle{text-align:center;color:#0d47a1;margin-bottom:20px;}
 
-/* INPUT */
 input{
 width:100%;
 padding:12px;
@@ -67,7 +64,6 @@ border-radius:6px;
 border:1px solid #ccc;
 }
 
-/* BUTTON */
 button{
 width:100%;
 padding:12px;
@@ -75,8 +71,8 @@ background:#0d47a1;
 color:#fff;
 border:none;
 border-radius:6px;
-cursor:pointer;
 font-weight:bold;
+cursor:pointer;
 }
 
 /* LOADING */
@@ -98,89 +94,75 @@ border-top:4px solid #0d47a1;
 border-radius:50%;
 animation:spin 1s linear infinite;
 }
-
 @keyframes spin{100%{transform:rotate(360deg);}}
 
-/* ================= IDENTITAS MODERN ================= */
+/* ===== IDENTITAS ===== */
 
-.identity{position:relative;overflow:hidden;}
-
-.watermark{
-position:absolute;
-top:50%;left:50%;
-transform:translate(-50%,-50%);
-width:300px;
-opacity:0.04;
-}
-
-/* HEADER IDENTITAS */
-.identity-header{
-background:linear-gradient(135deg,#0d47a1,#1565c0);
-color:#fff;
-padding:20px;
-border-radius:10px;
+/* LOGO BOX */
+.logo-box{
 text-align:center;
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
 margin-bottom:15px;
 }
 
-.identity-header img{
-width:70px;
-background:#fff;
-border-radius:50%;
-padding:8px;
-margin-bottom:10px;
+.logo-box img{
+width:80px;
 }
 
-.identity-name{
+/* NAMA */
+.nama{
+text-align:center;
 font-size:20px;
 font-weight:bold;
+margin-top:10px;
 }
 
-/* STATUS BADGE */
-.status{
-margin-top:8px;
-display:inline-block;
-padding:6px 14px;
-background:#4caf50;
-border-radius:20px;
-font-size:12px;
-font-weight:bold;
+/* IDENTITAS BOX */
+.data-box{
+background:#fff;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+margin-top:15px;
 }
 
-/* GRID */
-.info{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-/* BOX DATA */
+/* ROW VARIASI */
 .row{
-background:#f9fbff;
-padding:10px;
-border-radius:8px;
-border-left:5px solid #0d47a1;
-}
-
-/* WARNA VARIASI */
-.row:nth-child(1){border-color:#1565c0;}
-.row:nth-child(2){border-color:#2e7d32;}
-.row:nth-child(3){border-color:#ef6c00;}
-.row:nth-child(4){border-color:#6a1b9a;}
-.row:nth-child(5){border-color:#00838f;}
-.row:nth-child(6){border-color:#c62828;}
-.row:nth-child(7){border-color:#283593;}
-.row:nth-child(8){border-color:#ad1457;}
-
-.label{
-font-size:12px;
-font-weight:bold;
-color:#555;
-}
-
-.value{
+display:flex;
+justify-content:space-between;
+padding:10px 15px;
 font-size:14px;
-margin-top:3px;
+}
+
+.row:nth-child(odd){background:#ffffff;}
+.row:nth-child(even){background:#f3f7ff;}
+
+.label{font-weight:bold;}
+.value{}
+
+/* BOX IJAZAH */
+.ijazah-box{
+background:#fff;
+margin-top:15px;
+padding:15px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+border-left:5px solid #4caf50;
+}
+
+.ijazah-row{
+display:flex;
+justify-content:space-between;
+margin:6px 0;
+font-size:14px;
+}
+
+.status-valid{
+color:#2e7d32;
+font-weight:bold;
 }
 
 /* FOOTER */
@@ -189,12 +171,11 @@ margin-top:20px;
 text-align:center;
 font-size:12px;
 color:#555;
-line-height:1.6;
 }
 
 /* MOBILE */
 @media(max-width:600px){
-.info{grid-template-columns:1fr;}
+.row,.ijazah-row{flex-direction:column;}
 }
 </style>
 </head>
@@ -203,15 +184,14 @@ line-height:1.6;
 
 <div class="header">verifikasi.ums.ac.id</div>
 
-<!-- LOADING -->
 <div id="loading">
 <div class="loader"></div>
-<p style="margin-top:15px;">Memuat data akademik...</p>
+<p>Memuat data akademik...</p>
 </div>
 
 <div class="container">
 
-<!-- SEARCH PAGE -->
+<!-- SEARCH -->
 <div id="searchPage" class="page active">
 
 <img src="https://upload.wikimedia.org/wikipedia/id/thumb/5/5c/Logo_UMS.png/200px-Logo_UMS.png" class="logo">
@@ -224,39 +204,42 @@ line-height:1.6;
 <button onclick="cari()">Tampilkan</button>
 
 <div class="footer">
-© 2026 Universitas Muhammadiyah Surakarta<br>
-Sistem Verifikasi Ijazah Digital
+© 2026 Universitas Muhammadiyah Surakarta
 </div>
 </div>
 
 </div>
 
-<!-- RESULT PAGE -->
+<!-- RESULT -->
 <div id="resultPage" class="page">
 
-<div class="card identity">
-
-<img src="https://upload.wikimedia.org/wikipedia/id/thumb/5/5c/Logo_UMS.png/200px-Logo_UMS.png" class="watermark">
-
-<div class="identity-header">
+<!-- LOGO BOX -->
+<div class="logo-box">
 <img src="https://upload.wikimedia.org/wikipedia/id/thumb/5/5c/Logo_UMS.png/200px-Logo_UMS.png">
-<div class="identity-name" id="nama"></div>
-<div class="status">IJAZAH VALID</div>
+<div class="nama" id="nama"></div>
 </div>
 
-<div class="info" id="data"></div>
+<!-- DATA -->
+<div class="data-box" id="data"></div>
+
+<!-- IJAZAH BOX -->
+<div class="ijazah-box">
+<div class="ijazah-row">
+<span>No Ijazah</span>
+<span id="ijazah"></span>
+</div>
+<div class="ijazah-row">
+<span>Status Dokumen</span>
+<span class="status-valid">VALID</span>
+</div>
+</div>
 
 <div class="footer">
-Keterangan: Data ijazah terdaftar dan sah pada sistem akademik Universitas Muhammadiyah Surakarta.<br>
 Nomor Verifikasi: UMS-VER-<span id="verif"></span><br><br>
-
-© 2026 Universitas Muhammadiyah Surakarta. All Rights Reserved.<br>
-Jl. A. Yani Tromol Pos 1 Kartasura Sukoharjo 57169
+© 2026 Universitas Muhammadiyah Surakarta
 </div>
 
 <button onclick="kembali()">Kembali</button>
-
-</div>
 
 </div>
 
@@ -271,8 +254,7 @@ prodi:"Informatika",
 fakultas:"Teknik",
 tahun:"2024",
 ipk:"3.85",
-ijazah:"602012024000123",
-akreditasi:"BAN-PT No. 1234/SK/BAN-PT/Ak/S/V/2023"
+ijazah:"602012024000123"
 };
 
 function cari(){
@@ -289,16 +271,15 @@ document.getElementById("loading").style.display="none";
 if(key.includes("agil")||key.includes("09011281924045")){
 
 document.getElementById("nama").innerText=dataMahasiswa.nama;
+document.getElementById("ijazah").innerText=dataMahasiswa.ijazah;
 
 document.getElementById("data").innerHTML=`
-<div class="row"><div class="label">NIM</div><div class="value">${dataMahasiswa.nim}</div></div>
-<div class="row"><div class="label">NIK</div><div class="value">${dataMahasiswa.nik}</div></div>
-<div class="row"><div class="label">Program Studi</div><div class="value">${dataMahasiswa.prodi}</div></div>
-<div class="row"><div class="label">Fakultas</div><div class="value">${dataMahasiswa.fakultas}</div></div>
-<div class="row"><div class="label">Tahun Lulus</div><div class="value">${dataMahasiswa.tahun}</div></div>
-<div class="row"><div class="label">IPK</div><div class="value">${dataMahasiswa.ipk}</div></div>
-<div class="row"><div class="label">Nomor Ijazah</div><div class="value">${dataMahasiswa.ijazah}</div></div>
-<div class="row"><div class="label">Akreditasi</div><div class="value">${dataMahasiswa.akreditasi}</div></div>
+<div class="row"><span class="label">NIM</span><span>${dataMahasiswa.nim}</span></div>
+<div class="row"><span class="label">NIK</span><span>${dataMahasiswa.nik}</span></div>
+<div class="row"><span class="label">Program Studi</span><span>${dataMahasiswa.prodi}</span></div>
+<div class="row"><span class="label">Fakultas</span><span>${dataMahasiswa.fakultas}</span></div>
+<div class="row"><span class="label">Tahun Lulus</span><span>${dataMahasiswa.tahun}</span></div>
+<div class="row"><span class="label">IPK</span><span>${dataMahasiswa.ipk}</span></div>
 `;
 
 document.getElementById("verif").innerText=Math.floor(Math.random()*999999);
