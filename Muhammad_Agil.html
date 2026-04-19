@@ -18,7 +18,6 @@
             overflow-x: hidden;
         }
 
-        /* Header */
         .header {
             background: #1565c0;
             color: white;
@@ -37,7 +36,7 @@
             font-weight: 500;
         }
 
-        .header-left .back-arrow {
+        .back-arrow {
             font-size: 20px;
             cursor: pointer;
         }
@@ -54,7 +53,6 @@
             cursor: pointer;
         }
 
-        /* Main Container */
         .container {
             max-width: 600px;
             margin: 0 auto;
@@ -63,7 +61,6 @@
             position: relative;
         }
 
-        /* Page Transitions */
         .page {
             position: absolute;
             top: 40px;
@@ -86,43 +83,26 @@
             transform: translateX(-50px);
         }
 
-        /* Logo Section */
         .logo-section {
             text-align: center;
             margin-bottom: 30px;
-            animation: fadeInDown 0.8s ease;
         }
 
         .logo-ums {
             width: 120px;
             height: 120px;
-            background: white;
-            border-radius: 50%;
             margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 3px solid #1565c0;
             position: relative;
-            overflow: hidden;
         }
 
-        .logo-ums::before {
-            content: "UMS";
-            font-size: 36px;
-            font-weight: bold;
-            color: #1565c0;
-            letter-spacing: 2px;
-        }
-
-        .logo-ums::after {
-            content: "";
-            position: absolute;
-            bottom: 15px;
-            width: 60%;
-            height: 2px;
-            background: #d4af37;
+        .logo-ums img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
         }
 
         .title {
@@ -139,14 +119,12 @@
             letter-spacing: 1px;
         }
 
-        /* Divider */
         .divider {
             height: 1px;
             background: linear-gradient(to right, transparent, #1565c0, transparent);
             margin: 25px 0;
         }
 
-        /* CAPTCHA Section */
         .captcha-container {
             background: white;
             padding: 25px;
@@ -156,37 +134,22 @@
         }
 
         .captcha-box {
-            background: #f0f0f0;
-            padding: 15px;
+            background: #f8f9fa;
+            padding: 20px;
             border-radius: 8px;
             display: inline-block;
             margin: 15px 0;
-            border: 2px dashed #ccc;
+            border: 2px solid #e0e0e0;
             position: relative;
-            overflow: hidden;
         }
 
         .captcha-text {
             font-family: 'Courier New', monospace;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
-            letter-spacing: 8px;
+            letter-spacing: 10px;
             color: #1565c0;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            position: relative;
-            z-index: 2;
-        }
-
-        .captcha-noise {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(0,0,0,0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0,0,0,0.05) 0%, transparent 50%);
-            z-index: 1;
         }
 
         .captcha-label {
@@ -194,18 +157,20 @@
             color: #666;
             margin-bottom: 10px;
             text-align: left;
+            font-weight: 500;
         }
 
         .captcha-input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px;
             border: 2px solid #ddd;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 18px;
             text-align: center;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             transition: all 0.3s;
             margin: 10px 0;
+            text-transform: lowercase;
         }
 
         .captcha-input:focus {
@@ -223,6 +188,7 @@
             align-items: center;
             gap: 5px;
             margin: 10px 0;
+            font-weight: 500;
         }
 
         .reload-link:hover {
@@ -241,8 +207,6 @@
             cursor: pointer;
             transition: all 0.3s;
             margin-top: 15px;
-            position: relative;
-            overflow: hidden;
         }
 
         .btn-primary:hover {
@@ -251,11 +215,6 @@
             box-shadow: 0 4px 12px rgba(21, 101, 192, 0.3);
         }
 
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
-        /* Search Page */
         .search-container {
             background: white;
             padding: 30px;
@@ -265,7 +224,7 @@
 
         .search-box {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .search-input {
@@ -288,13 +247,13 @@
             left: 18px;
             top: 50%;
             transform: translateY(-50%);
-            color: #999;
+            font-size: 16px;
         }
 
         .search-hint {
             font-size: 12px;
             color: #888;
-            margin-top: 8px;
+            margin-bottom: 20px;
             text-align: center;
         }
 
@@ -315,7 +274,23 @@
             background: #1b5e20;
         }
 
-        /* Loading Screen */
+        .copyright {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 11px;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        .copyright strong {
+            color: #666;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -328,7 +303,6 @@
             justify-content: center;
             flex-direction: column;
             z-index: 1000;
-            backdrop-filter: blur(5px);
         }
 
         .loading-overlay.active {
@@ -336,8 +310,8 @@
         }
 
         .loader {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border: 4px solid #e3f2fd;
             border-top: 4px solid #1565c0;
             border-radius: 50%;
@@ -348,7 +322,7 @@
         .loading-text {
             font-size: 16px;
             color: #1565c0;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .loading-subtext {
@@ -357,34 +331,30 @@
             margin-top: 5px;
         }
 
-        /* Identity Card */
         .identity-card {
             background: white;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
             border: 1px solid #e0e0e0;
         }
 
         .identity-header {
             background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
             color: white;
-            padding: 25px;
+            padding: 30px 25px;
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
 
         .identity-header::before {
             content: "";
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.3;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
         }
 
         .status-badge {
@@ -394,71 +364,91 @@
             background: rgba(255,255,255,0.2);
             padding: 8px 20px;
             border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            backdrop-filter: blur(10px);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
             border: 1px solid rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .status-dot {
             width: 10px;
             height: 10px;
-            background: #4caf50;
+            background: #76ff03;
             border-radius: 50%;
             animation: pulse 2s infinite;
-            box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
         }
 
-        .identity-photo {
-            width: 100px;
-            height: 120px;
+        .identity-logo {
+            width: 90px;
+            height: 90px;
             background: white;
-            border-radius: 8px;
-            margin: 0 auto 15px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 3px solid rgba(255,255,255,0.5);
-            overflow: hidden;
-            position: relative;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .identity-photo::after {
-            content: "👤";
-            font-size: 50px;
-            opacity: 0.3;
+        .identity-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .identity-name {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            position: relative;
         }
 
         .identity-nim {
-            font-size: 14px;
+            font-size: 15px;
             opacity: 0.9;
             font-family: monospace;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            position: relative;
         }
 
         .identity-body {
-            padding: 25px;
+            padding: 0;
         }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
+        .info-row {
+            display: flex;
+            padding: 16px 25px;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: center;
+            transition: background 0.2s;
         }
 
-        .info-item {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid #1565c0;
+        .info-row:hover {
+            background: #fafafa;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-icon {
+            width: 36px;
+            height: 36px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .info-content {
+            flex: 1;
         }
 
         .info-label {
@@ -466,104 +456,68 @@
             color: #888;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
         .info-value {
-            font-size: 14px;
+            font-size: 15px;
             color: #333;
             font-weight: 600;
         }
 
-        .info-full {
+        .identity-footer {
             background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid #4caf50;
-            margin-bottom: 15px;
-        }
-
-        .verification-footer {
-            background: #e8f5e9;
-            padding: 15px;
+            padding: 20px 25px;
             text-align: center;
-            border-top: 1px solid #c8e6c9;
+            border-top: 2px solid #e3f2fd;
         }
 
-        .verification-text {
+        .verify-text {
             color: #2e7d32;
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            margin-bottom: 8px;
         }
 
-        .qr-section {
-            text-align: center;
-            padding: 20px;
-            background: white;
-            border-top: 1px dashed #ddd;
-        }
-
-        .qr-code {
-            width: 120px;
-            height: 120px;
-            background: white;
-            border: 2px solid #1565c0;
-            border-radius: 8px;
-            margin: 0 auto 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .qr-pattern {
-            width: 80%;
-            height: 80%;
-            background-image: 
-                repeating-linear-gradient(0deg, #1565c0 0px, #1565c0 4px, transparent 4px, transparent 8px),
-                repeating-linear-gradient(90deg, #1565c0 0px, #1565c0 4px, transparent 4px, transparent 8px);
-            background-size: 8px 8px;
-            opacity: 0.3;
-        }
-
-        .qr-label {
-            font-size: 11px;
+        .verify-date {
+            font-size: 12px;
             color: #666;
         }
 
         .back-btn {
             width: 100%;
-            padding: 12px;
-            background: #f5f5f5;
-            color: #666;
-            border: 1px solid #ddd;
+            padding: 14px;
+            background: white;
+            color: #1565c0;
+            border: 2px solid #1565c0;
             border-radius: 8px;
             font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
             margin-top: 20px;
             transition: all 0.3s;
         }
 
         .back-btn:hover {
-            background: #eeeeee;
+            background: #1565c0;
+            color: white;
         }
 
-        /* Error Message */
         .error-message {
             background: #ffebee;
             color: #c62828;
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
             border-left: 4px solid #c62828;
             display: none;
             margin-top: 15px;
+            font-weight: 500;
         }
 
         .error-message.show {
@@ -571,21 +525,15 @@
             animation: shake 0.5s ease;
         }
 
-        /* Animations */
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
         @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(118, 255, 3, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(118, 255, 3, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(118, 255, 3, 0); }
         }
 
         @keyframes shake {
@@ -594,31 +542,16 @@
             75% { transform: translateX(10px); }
         }
 
-        /* Responsive */
         @media (max-width: 480px) {
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
             .title { font-size: 20px; }
             .subtitle { font-size: 18px; }
-        }
-
-        /* Watermark */
-        .watermark {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            opacity: 0.1;
-            font-size: 12px;
-            color: #1565c0;
-            pointer-events: none;
-            z-index: -1;
+            .captcha-text { font-size: 28px; letter-spacing: 6px; }
+            .identity-name { font-size: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <div class="header">
         <div class="header-left">
             <span class="back-arrow" onclick="goBack()">←</span>
@@ -630,7 +563,6 @@
         </div>
     </div>
 
-    <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loader"></div>
         <div class="loading-text">Memuat Data Akademik...</div>
@@ -642,7 +574,9 @@
         <!-- PAGE 1: CAPTCHA -->
         <div class="page active" id="pageCaptcha">
             <div class="logo-section">
-                <div class="logo-ums"></div>
+                <div class="logo-ums">
+                    <img src="logo_ums.png" alt="Logo UMS" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size:40px;font-weight:bold;color:#1565c0;\'>UMS</div>';">
+                </div>
                 <div class="title">Verifikasi Ijazah</div>
                 <div class="subtitle">Universitas Muhammadiyah Surakarta</div>
             </div>
@@ -650,17 +584,16 @@
             <div class="divider"></div>
 
             <div class="captcha-container">
-                <div class="captcha-label">Masukkan kode di atas:</div>
+                <div class="captcha-label">Masukkan kode di bawah ini:</div>
                 <div class="captcha-box">
-                    <div class="captcha-noise"></div>
                     <div class="captcha-text" id="captchaText">xz3x3t</div>
                 </div>
                 
-                <input type="text" class="captcha-input" id="captchaInput" placeholder="Ketik kode di sini" maxlength="6">
+                <input type="text" class="captcha-input" id="captchaInput" placeholder="Ketik kode di sini" maxlength="6" autocomplete="off">
                 
                 <div>
                     <a class="reload-link" onclick="generateCaptcha()">
-                        <span>↻</span> Klik disini untuk memuat ulang kode validasi tersebut.
+                        <span>↻</span> Klik disini untuk memuat ulang kode validasi
                     </a>
                 </div>
 
@@ -675,7 +608,9 @@
         <!-- PAGE 2: SEARCH -->
         <div class="page" id="pageSearch">
             <div class="logo-section">
-                <div class="logo-ums" style="width:80px;height:80px;"></div>
+                <div class="logo-ums" style="width:80px;height:80px;">
+                    <img src="logo_ums.png" alt="Logo UMS" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size:28px;font-weight:bold;color:#1565c0;\'>UMS</div>';">
+                </div>
                 <div class="title" style="font-size:20px;">Pencarian Data Ijazah</div>
                 <div class="subtitle" style="font-size:16px;">Universitas Muhammadiyah Surakarta</div>
             </div>
@@ -692,13 +627,19 @@
                     Contoh: Muhammad Agil atau 09011281924045
                 </div>
 
-                <div class="error-message" id="searchError" style="margin-top:15px;">
+                <div class="error-message" id="searchError">
                     Data tidak ditemukan. Pastikan nama atau NIM yang Anda masukkan benar.
                 </div>
 
-                <button class="btn-search" onclick="searchData()" style="margin-top:20px;">
-                    Cari Data
-                </button>
+                <button class="btn-search" onclick="searchData()">Cari Data</button>
+
+                <div class="copyright">
+                    <strong>© 2024 Universitas Muhammadiyah Surakarta</strong>
+                    Sistem Verifikasi Ijazah Digital<br>
+                    Fakultas Teknik | Program Studi Informatika<br>
+                    Jl. A. Yani Tromol Pos 1 Pabelan Kartasura Sukoharjo 57169<br>
+                    Telp. (0271) 717417 | Email: info@ums.ac.id
+                </div>
             </div>
         </div>
 
@@ -708,71 +649,102 @@
                 <div class="identity-header">
                     <div class="status-badge">
                         <div class="status-dot"></div>
-                        <span>STATUS IJAZAH VALID</span>
-         </div>
-                    <div class="identity-photo"></div>
+                        <span>Status Ijazah Valid</span>
+                    </div>
+                    <div class="identity-logo">
+                        <img src="logo_ums.png" alt="Logo UMS" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size:28px;font-weight:bold;color:#1565c0;\'>UMS</div>';">
+                    </div>
                     <div class="identity-name" id="displayName">Muhammad Agil</div>
                     <div class="identity-nim" id="displayNim">NIM: 09011281924045</div>
                 </div>
 
                 <div class="identity-body">
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-label">Fakultas</div>
-                            <div class="info-value">Teknik</div>
-                        </div>
-                        <div class="info-item">
+                    <div class="info-row">
+                        <div class="info-icon">🎓</div>
+                        <div class="info-content">
                             <div class="info-label">Program Studi</div>
-                            <div class="info-value">Informatika</div>
+                            <div class="info-value" id="displayProdi">Informatika</div>
                         </div>
-                        <div class="info-item">
-                            <div class="info-label">Jenjang</div>
-                            <div class="info-value">Sarjana (S1)</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon">🏛️</div>
+                        <div class="info-content">
+                            <div class="info-label">Fakultas</div>
+                            <div class="info-value" id="displayFakultas">Teknik</div>
                         </div>
-                        <div class="info-item">
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon">📜</div>
+                        <div class="info-content">
+                            <div class="info-label">Jenjang Pendidikan</div>
+                            <div class="info-value" id="displayJenjang">Sarjana (S1)</div>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon">📅</div>
+                        <div class="info-content">
                             <div class="info-label">Tahun Lulus</div>
-                            <div class="info-value">2024</div>
+                            <div class="info-value" id="displayTahun">2024</div>
                         </div>
-                        <div class="info-item">
-                            <div class="info-label">Gelar</div>
-                            <div class="info-value">S.Kom</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon">🏅</div>
+                        <div class="info-content">
+                            <div class="info-label">Gelar Akademik</div>
+                            <div class="info-value" id="displayGelar">Sarjana Komputer (S.Kom)</div>
                         </div>
-                        <div class="info-item">
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon">⭐</div>
+                        <div class="info-content">
+                            <div class="info-label">Predikat Kelulusan</div>
+                            <div class="info-value" id="displayPredikat">Dengan Pujian (Cumlaude)</div>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon">📊</div>
+                        <div class="info-content">
                             <div class="info-label">IPK</div>
-                            <div class="info-value">3.85 / 4.00</div>
+                            <div class="info-value" id="displayIPK">3.85 / 4.00</div>
                         </div>
                     </div>
-
-                    <div class="info-full">
-                        <div class="info-label">Nomor Ijazah</div>
-                        <div class="info-value" style="font-family:monospace;letter-spacing:1px;">602012024000123</div>
+                    <div class="info-row">
+                        <div class="info-icon">🔢</div>
+                        <div class="info-content">
+                            <div class="info-label">Nomor Ijazah</div>
+                            <div class="info-value" id="displayIjazah" style="font-family:monospace;letter-spacing:1px;">602012024000123</div>
+                        </div>
                     </div>
-
-                    <div class="info-full">
-                        <div class="info-label">Tanggal Kelulusan</div>
-                        <div class="info-value">15 Agustus 2024</div>
+                    <div class="info-row">
+                        <div class="info-icon">📆</div>
+                        <div class="info-content">
+                            <div class="info-label">Tanggal Kelulusan</div>
+                            <div class="info-value" id="displayTanggal">15 Agustus 2024</div>
+                        </div>
                     </div>
-
-                    <div class="info-full">
-                        <div class="info-label">Yudisium</div>
-                        <div class="info-value">Dengan Pujian (Cumlaude)</div>
+                    <div class="info-row">
+                        <div class="info-icon">👤</div>
+                        <div class="info-content">
+                            <div class="info-label">Dosen Pembimbing</div>
+                            <div class="info-value">Dr. Bambang Santoso, M.Kom</div>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon">📝</div>
+                        <div class="info-content">
+                            <div class="info-label">Judul Skripsi</div>
+                            <div class="info-value">Sistem Verifikasi Ijazah Digital Berbasis Web Menggunakan Teknologi Blockchain</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="qr-section">
-                    <div class="qr-code">
-                        <div class="qr-pattern"></div>
-                    </div>
-                    <div class="qr-label">Scan untuk verifikasi digital</div>
-                </div>
-
-                <div class="verification-footer">
-                    <div class="verification-text">
+                <div class="identity-footer">
+                    <div class="verify-text">
                         <span>✓</span>
                         <span>Diverifikasi oleh Universitas Muhammadiyah Surakarta</span>
                     </div>
-                    <div style="font-size:11px;color:#666;margin-top:5px;">
-                        Tanggal Verifikasi: <span id="verifyDate"></span>
+                    <div class="verify-date">
+                        Tanggal Verifikasi: <span id="verifyDate"></span> | Sistem Akademik UMS
                     </div>
                 </div>
             </div>
@@ -782,23 +754,22 @@
 
     </div>
 
-    <div class="watermark">UMS © 2024</div>
-
     <script>
-        // Data Mahasiswa (Simulasi Database)
         const students = [
             {
                 name: "Muhammad Agil",
                 nim: "09011281924045",
-                faculty: "Teknik",
-                major: "Informatika",
-                degree: "Sarjana (S1)",
-                year: "2024",
-                title: "S.Kom",
-                gpa: "3.85",
+                prodi: "Informatika",
+                fakultas: "Teknik",
+                jenjang: "Sarjana (S1)",
+                tahun: "2024",
+                gelar: "Sarjana Komputer (S.Kom)",
+                predikat: "Dengan Pujian (Cumlaude)",
+                ipk: "3.85 / 4.00",
                 ijazah: "602012024000123",
-                graduationDate: "15 Agustus 2024",
-                yudisium: "Dengan Pujian (Cumlaude)"
+                tanggal: "15 Agustus 2024",
+                dosen: "Dr. Bambang Santoso, M.Kom",
+                judul: "Sistem Verifikasi Ijazah Digital Berbasis Web Menggunakan Teknologi Blockchain"
             }
         ];
 
@@ -817,14 +788,12 @@
         }
 
         function verifyCaptcha() {
-            const input = document.getElementById('captchaInput').value.toLowerCase();
+            const input = document.getElementById('captchaInput').value.toLowerCase().trim();
             if (input === currentCaptcha) {
                 transitionTo('pageCaptcha', 'pageSearch');
             } else {
                 document.getElementById('captchaError').classList.add('show');
-                setTimeout(() => {
-                    document.getElementById('captchaError').classList.remove('show');
-                }, 3000);
+                setTimeout(() => document.getElementById('captchaError').classList.remove('show'), 3000);
             }
         }
 
@@ -838,10 +807,8 @@
                 return;
             }
 
-            // Show loading
             document.getElementById('loadingOverlay').classList.add('active');
 
-            // Simulate 1.5s loading
             setTimeout(() => {
                 document.getElementById('loadingOverlay').classList.remove('active');
                 
@@ -863,10 +830,18 @@
         function displayIdentity(data) {
             document.getElementById('displayName').textContent = data.name;
             document.getElementById('displayNim').textContent = `NIM: ${data.nim}`;
+            document.getElementById('displayProdi').textContent = data.prodi;
+            document.getElementById('displayFakultas').textContent = data.fakultas;
+            document.getElementById('displayJenjang').textContent = data.jenjang;
+            document.getElementById('displayTahun').textContent = data.tahun;
+            document.getElementById('displayGelar').textContent = data.gelar;
+            document.getElementById('displayPredikat').textContent = data.predikat;
+            document.getElementById('displayIPK').textContent = data.ipk;
+            document.getElementById('displayIjazah').textContent = data.ijazah;
+            document.getElementById('displayTanggal').textContent = data.tanggal;
+            
             document.getElementById('verifyDate').textContent = new Date().toLocaleDateString('id-ID', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
+                day: 'numeric', month: 'long', year: 'numeric'
             });
             
             transitionTo('pageSearch', 'pageIdentity');
@@ -894,33 +869,19 @@
             const pages = ['pageCaptcha', 'pageSearch', 'pageIdentity'];
             const active = pages.find(id => document.getElementById(id).classList.contains('active'));
             
-            if (active === 'pageSearch') {
-                transitionTo('pageSearch', 'pageCaptcha');
-            } else if (active === 'pageIdentity') {
-                transitionTo('pageIdentity', 'pageSearch');
-            }
+            if (active === 'pageSearch') transitionTo('pageSearch', 'pageCaptcha');
+            else if (active === 'pageIdentity') transitionTo('pageIdentity', 'pageSearch');
         }
 
-        // Enter key support
-        document.getElementById('captchaInput').addEventListener('keypress', function(e) {
+        document.getElementById('captchaInput').addEventListener('keypress', e => {
             if (e.key === 'Enter') verifyCaptcha();
         });
 
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+        document.getElementById('searchInput').addEventListener('keypress', e => {
             if (e.key === 'Enter') searchData();
-        });
-
-        // Set current date
-        document.addEventListener('DOMContentLoaded', function() {
-            if (document.getElementById('verifyDate')) {
-                document.getElementById('verifyDate').textContent = new Date().toLocaleDateString('id-ID', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
-                });
-            }
         });
     </script>
 
 </body>
 </html>
+</bo
