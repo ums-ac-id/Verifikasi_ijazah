@@ -17,7 +17,8 @@ background:linear-gradient(135deg,#eef2f7,#cfd9e6);
 .header{
 background:#0d47a1;
 color:#fff;
-padding:12px 20px;
+padding:12px;
+text-align:center;
 font-weight:bold;
 }
 
@@ -25,7 +26,7 @@ font-weight:bold;
 .container{
 max-width:650px;
 margin:auto;
-padding:30px 20px;
+padding:20px;
 position:relative;
 }
 
@@ -47,14 +48,14 @@ pointer-events:auto;
 /* CARD */
 .card{
 background:#fff;
-padding:25px;
+padding:20px;
 border-radius:12px;
-box-shadow:0 10px 30px rgba(0,0,0,.1);
+box-shadow:0 8px 25px rgba(0,0,0,.1);
 }
 
 /* SEARCH */
-.logo{width:100px;margin:auto;display:block;}
-.title{text-align:center;font-size:22px;font-weight:bold;margin-top:10px;}
+.logo{width:90px;margin:auto;display:block;}
+.title{text-align:center;font-size:20px;font-weight:bold;margin-top:10px;}
 .subtitle{text-align:center;color:#0d47a1;margin-bottom:20px;}
 
 input{
@@ -63,6 +64,7 @@ padding:12px;
 margin:10px 0;
 border-radius:6px;
 border:1px solid #ccc;
+font-size:14px;
 }
 
 button{
@@ -101,28 +103,27 @@ animation:spin 1s linear infinite;
 .top-box{
 text-align:center;
 background:#fff;
-padding:20px;
+padding:15px;
 border-radius:12px;
-box-shadow:0 6px 20px rgba(0,0,0,.08);
+box-shadow:0 5px 15px rgba(0,0,0,.08);
 margin-bottom:15px;
 border-top:5px solid #0d47a1;
 }
 
 .top-box img{
-width:80px;
-margin-bottom:10px;
+width:70px;
+margin-bottom:8px;
 }
 
 .kampus{
 font-weight:bold;
-font-size:16px;
-letter-spacing:1px;
+font-size:14px;
 }
 
-/* IJAZAH */
+/* IJAZAH BOX */
 .ijazah-inline{
 margin-top:10px;
-font-size:14px;
+font-size:13px;
 background:#f5f9ff;
 padding:10px;
 border-radius:8px;
@@ -139,7 +140,7 @@ font-weight:bold;
 background:#fff;
 border-radius:12px;
 padding:15px;
-box-shadow:0 6px 20px rgba(0,0,0,.08);
+box-shadow:0 5px 15px rgba(0,0,0,.08);
 border-top:5px solid #1565c0;
 }
 
@@ -147,43 +148,46 @@ border-top:5px solid #1565c0;
 display:flex;
 padding:8px 0;
 border-bottom:1px solid #eee;
+font-size:14px;
 }
 
 .row:last-child{border-bottom:none;}
 
 .label{
-width:200px;
+width:45%;
 font-weight:bold;
-color:#333;
 }
 
 .separator{
-width:15px;
+width:10px;
+text-align:center;
 }
 
 .value{
 flex:1;
-color:#222;
 }
 
-/* FOOTER BOX */
+/* FOOTER */
 .footer{
 margin-top:15px;
 background:#fff;
-padding:15px;
+padding:12px;
 border-radius:10px;
-box-shadow:0 6px 20px rgba(0,0,0,.08);
+box-shadow:0 5px 15px rgba(0,0,0,.08);
 text-align:center;
 font-size:12px;
-line-height:1.6;
+line-height:1.5;
 border-top:4px solid #2e7d32;
 }
 
-/* MOBILE */
+/* MOBILE FIX */
 @media(max-width:600px){
-.row{flex-direction:column;}
-.label{width:100%;}
-.separator{display:none;}
+.container{padding:15px;}
+.row{
+flex-direction:row;
+font-size:13px;
+}
+.label{width:50%;}
 }
 </style>
 </head>
@@ -223,10 +227,8 @@ Sistem Verifikasi Ijazah Digital
 <!-- RESULT -->
 <div id="resultPage" class="page">
 
-<!-- TOP -->
 <div class="top-box">
 <img src="logo-ums.png">
-
 <div class="kampus">UNIVERSITAS MUHAMMADIYAH SURAKARTA</div>
 
 <div class="ijazah-inline">
@@ -235,15 +237,12 @@ Status Dokumen : <span class="valid">VALID</span>
 </div>
 </div>
 
-<!-- IDENTITAS -->
 <div class="data-box" id="data"></div>
 
-<!-- FOOTER -->
 <div class="footer">
 Keterangan: Data ijazah terverifikasi resmi oleh sistem akademik Universitas Muhammadiyah Surakarta.<br>
 Nomor Verifikasi: UMS-VER-<span id="verif"></span><br><br>
-© 2026 Universitas Muhammadiyah Surakarta<br>
-Jl. A. Yani Tromol Pos 1 Kartasura Sukoharjo 57169
+© 2026 Universitas Muhammadiyah Surakarta
 </div>
 
 <button onclick="kembali()">Kembali</button>
@@ -257,6 +256,7 @@ const dataMahasiswa={
 nama:"Muhammad Agil",
 nim:"09011281924045",
 nik:"337401xxxxxxxxxx",
+jenjang:"Strata 1 (S1)",
 prodi:"Informatika",
 fakultas:"Teknik",
 tahun:"2024",
@@ -284,6 +284,7 @@ document.getElementById("data").innerHTML=`
 <div class="row"><div class="label">Nama</div><div class="separator">:</div><div class="value">${dataMahasiswa.nama}</div></div>
 <div class="row"><div class="label">NIM</div><div class="separator">:</div><div class="value">${dataMahasiswa.nim}</div></div>
 <div class="row"><div class="label">NIK</div><div class="separator">:</div><div class="value">${dataMahasiswa.nik}</div></div>
+<div class="row"><div class="label">Jenjang Pendidikan</div><div class="separator">:</div><div class="value">${dataMahasiswa.jenjang}</div></div>
 <div class="row"><div class="label">Program Studi</div><div class="separator">:</div><div class="value">${dataMahasiswa.prodi}</div></div>
 <div class="row"><div class="label">Fakultas</div><div class="separator">:</div><div class="value">${dataMahasiswa.fakultas}</div></div>
 <div class="row"><div class="label">Tahun Lulus</div><div class="separator">:</div><div class="value">${dataMahasiswa.tahun}</div></div>
