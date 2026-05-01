@@ -18,7 +18,6 @@ background:#0d47a1;
 color:#fff;
 padding:14px;
 text-align:center;
-font-weight:bold;
 font-size:15px;
 }
 
@@ -52,7 +51,7 @@ box-shadow:0 6px 20px rgba(0,0,0,.08);
 }
 
 .logo{width:80px;margin:auto;display:block;}
-.title{text-align:center;font-size:18px;font-weight:bold;margin-top:8px;}
+.title{text-align:center;font-size:18px;margin-top:8px;}
 .subtitle{text-align:center;color:#0d47a1;margin-bottom:18px;font-size:14px;}
 
 input{
@@ -70,7 +69,6 @@ background:#0d47a1;
 color:#fff;
 border:none;
 border-radius:8px;
-font-weight:bold;
 cursor:pointer;
 }
 
@@ -115,7 +113,7 @@ border-radius:8px;
 border:1px solid #dbe7ff;
 }
 
-.valid{color:#2e7d32;font-weight:bold;}
+.valid{color:#2e7d32;}
 
 .data-box{
 background:#fff;
@@ -135,8 +133,12 @@ align-items:flex-start;
 
 .label{
 width:55%;
-font-weight:bold;
 line-height:1.3;
+}
+
+.label small{
+font-style:italic; /* 🔥 terjemahan jadi miring */
+color:#555;
 }
 
 .separator{
@@ -172,7 +174,6 @@ line-height:1.5;
 
 <div class="container">
 
-<!-- SEARCH -->
 <div id="searchPage" class="page active">
 <img src="logo-ums.png" class="logo">
 <div class="title">Verifikasi Ijazah</div>
@@ -188,12 +189,11 @@ line-height:1.5;
 </div>
 </div>
 
-<!-- RESULT -->
 <div id="resultPage" class="page">
 
 <div class="top-box">
 <img src="logo-ums.png">
-<div><b>UNIVERSITAS MUHAMMADIYAH SURAKARTA</b></div>
+<div>UNIVERSITAS MUHAMMADIYAH SURAKARTA</div>
 
 <div class="ijazah-inline">
 No Ijazah : <span id="ijazah"></span><br>
@@ -234,19 +234,6 @@ fakultas:"Agama Islam",
 tanggallulus:"06 Februari 2024",
 ipk:"3.85",
 ijazah:"60201224001571",
-akreditasi:"BAN-PT 2021"
-},
-{
-nama:"Ahmad Fauzi",
-nim:"G2176231205",
-nik:"352209********03",
-jenjang:"S1",
-gelar:"S.Ag",
-prodi:"Ilmu Hadis",
-fakultas:"Agama Islam",
-tanggallulus:"10 Maret 2024",
-ipk:"3.70",
-ijazah:"60201224001572",
 akreditasi:"BAN-PT 2021"
 }
 ];
@@ -295,48 +282,6 @@ document.getElementById("data").innerHTML = `
 <div class="label">Nomor Ijazah<br><small>Diploma Number</small></div>
 <div class="separator">:</div>
 <div class="value">${hasil.ijazah}</div>
-</div>
-
-<div class="row">
-<div class="label">Jenjang Pendidikan<br><small>Level of Education</small></div>
-<div class="separator">:</div>
-<div class="value">${hasil.jenjang}</div>
-</div>
-
-<div class="row">
-<div class="label">Gelar Akademik<br><small>Academic Degree</small></div>
-<div class="separator">:</div>
-<div class="value">${hasil.gelar}</div>
-</div>
-
-<div class="row">
-<div class="label">Program Studi<br><small>Study Program</small></div>
-<div class="separator">:</div>
-<div class="value">${hasil.prodi}</div>
-</div>
-
-<div class="row">
-<div class="label">Fakultas<br><small>Faculty</small></div>
-<div class="separator">:</div>
-<div class="value">${hasil.fakultas}</div>
-</div>
-
-<div class="row">
-<div class="label">Tanggal Lulus<br><small>Date of Graduation</small></div>
-<div class="separator">:</div>
-<div class="value">${hasil.tanggallulus}</div>
-</div>
-
-<div class="row">
-<div class="label">Indeks Prestasi Kumulatif<br><small>Cumulative GPA</small></div>
-<div class="separator">:</div>
-<div class="value">${hasil.ipk}</div>
-</div>
-
-<div class="row">
-<div class="label">Akreditasi Program Studi<br><small>Study Program Accreditation</small></div>
-<div class="separator">:</div>
-<div class="value">${hasil.akreditasi}</div>
 </div>
 
 `;
